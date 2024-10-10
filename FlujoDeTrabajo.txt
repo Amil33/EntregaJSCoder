@@ -1,0 +1,52 @@
+Si vamos a seccionar la generación de código para organizar el trabajo de forma eficiente y evitar posibles errores, aquí te dejo una propuesta de los pasos en los que podríamos dividir el desarrollo, enfocándonos en una implementación estructurada:
+
+1. Actualización del Formulario y Validaciones:
+Objetivo: Actualizar la interfaz para permitir la selección de raza, género, trasfondo, y edad; además de agregar los recuadros que muestren las habilidades y limitaciones por raza.
+Tareas a realizar:
+Agregar selectores para raza, trasfondo y edad: Actualizar los campos del formulario para permitir la selección de raza, género, y trasfondo.
+Mostrar habilidades de raza dinámicamente: Crear recuadros para mostrar las habilidades específicas según la raza seleccionada. Este recuadro debe cambiar en tiempo real según la elección de raza.
+Agregar restricciones de edad según raza: Implementar lógica para que las opciones de edad varíen según la raza seleccionada.
+Validaciones: Verificar que el usuario ha ingresado un nombre, seleccionado un género, una raza, un trasfondo, y que la edad esté dentro del rango permitido.
+Pruebas: Verificar que los datos se validan correctamente y se muestran los recuadros con las habilidades de raza.
+
+
+
+2. Incorporación del Trasfondo y sus Efectos:
+Objetivo: Implementar el sistema de trasfondo, que afectará los atributos secundarios o habilidades iniciales del personaje.
+Tareas a realizar:
+Estructurar el sistema de trasfondo: Definir cómo afecta cada trasfondo (Peleador, Médico, Socialista) los atributos o habilidades del personaje.
+Incorporar trasfondo en la clase Personaje: Adaptar el constructor de la clase para asignar automáticamente los beneficios de trasfondo al personaje.
+Interfaz: Asegurarse de que el trasfondo se seleccione correctamente en el formulario y los efectos se apliquen al personaje.
+
+
+3. Cálculo y Aplicación del Sistema de Nivel:
+Objetivo: Implementar el sistema de nivelación que permita que el personaje gane experiencia y suba de nivel a lo largo del juego.
+Tareas a realizar:
+Agregar sistema de experiencia y nivelación: Definir una estructura para el sistema de nivel, con experiencia acumulada y puntos requeridos para subir de nivel.
+Integración del nivel en la clase Personaje: Agregar atributos de nivel y experiencia al constructor del personaje.
+Experiencia inicial: Implementar la experiencia base que se obtiene según la edad del personaje.
+Penalizador de experiencia por edad: Crear la lógica que reduce el progreso de experiencia según la edad seleccionada.
+
+
+
+4. Cálculo de Atributos Secundarios y Modificadores:
+Objetivo: Asegurarse de que los atributos secundarios (vitalidad, resistencia, etc.) se calculen correctamente y que la edad afecte a los mismos mediante modificadores.
+Tareas a realizar:
+Definir y calcular atributos secundarios: Usar las estadísticas predefinidas de raza y trasfondo para calcular atributos secundarios (como vitalidad, energía, estamina).
+Incorporar modificadores de edad: Implementar cómo la edad afecta los atributos del personaje. Por ejemplo, si es mayor, la vitalidad y otros atributos podrían verse reducidos.
+Mostrar atributos en la interfaz (opcional): Si se desea, mostrar estos valores en una vista previa del personaje creado.
+
+
+
+5. Optimización y Pruebas del Flujo Completo de Creación de Personaje:
+Objetivo: Asegurarse de que todo el sistema esté cohesionado y funcional.
+Tareas a realizar:
+Integrar todo el flujo de creación: Asegurarse de que cada parte (formulario, validaciones, trasfondo, nivel, atributos) esté correctamente integrada.
+Pruebas de funcionalidad: Ejecutar pruebas del flujo completo para garantizar que el personaje se cree correctamente según las entradas del formulario y que el código sea robusto.
+Resumen de los Pasos:
+Formulario y Validaciones.
+Trasfondo y sus efectos en las estadísticas.
+Sistema de Nivel y Experiencia.
+Atributos Secundarios y Modificadores por edad.
+Optimización y pruebas de integración.
+Estos pasos nos permiten construir de forma modular y asegurarnos de que cada parte del sistema funciona correctamente antes de avanzar al siguiente nivel.

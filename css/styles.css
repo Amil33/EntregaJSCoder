@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #1a237e;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-button {
+    background-color: #ffffff;
+    color: #1a237e;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-button:hover {
+    background-color: #1a237e;
+    color: #ffffff;
+}
+/* ----------------
+                Seccion de creacion de personaje
+                                              --------------------- */
+#character-creation {
+    background-color: #283593;
+    padding: 20px;
+    width: 1440px;
+    max-width: 90%;
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+label, input, select {
+    color: white;
+}
+
+input, select {
+    background-color: #1a237e;
+    border: 1px solid white;
+    color: white;
+    padding: 5px;
+}
+
+form {
+    text-align: left;
+}
+
+/* Formulario de datos del personaje */
+
+#character-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+    max-width: 30%;
+    border: solid 1px white;
+}
+
+#character-form {
+    padding: 5px;
+}
+/* Seccion de informacion de raza y trasfondo*/
+.cuadro {
+    width: 90%;
+    height: 100px;
+    margin: 5px auto;
+}
+
+#cuadro-habilidades, #cuadro-trasfondo {
+    background-color: #48e; /* Se actualizarán según la raza y trasfondo */
+}
+
+/* Visualizacion del personaje */
+#character-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 1800px;
+    max-width: 50%;
+}
+
+.color-rectangle {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+
+#base-color, #sex-color {
+    background-color: #333; /* Gris por defecto */
+}
+
+
+/* -----------------------
+                        Fin de la seccion de creacion de personaje
+                                                        -------------------------*/
+
+/* Estilo para el contenedor y botones de las secciones adicionales */
+#load-game, #options, #credits {
+    background-color: #283593;
+    border: 1px solid white;
+    padding: 20px;
+    display: none;
+}
+
+/* Estilo para los botones dentro de Cargar Partida, Opciones y Créditos */
+.save-slot {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid white;
+    background-color: #1a237e;
+}
+
+.save-slot button {
+    background-color: #ffffff;
+    color: #1a237e;
+    border: 2px solid #ffffff;
+    padding: 5px 10px;
+    margin: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.save-slot button:hover {
+    background-color: #1a237e;
+    color: #ffffff;
+}
+
+/* Botones de retorno en cada sección */
+#return-to-menu-load, #return-to-menu-options, #return-to-menu-credits {
+    background-color: #ffffff;
+    color: #1a237e;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#return-to-menu-load:hover, #return-to-menu-options:hover, #return-to-menu-credits:hover {
+    background-color: #1a237e;
+    color: #fff;
+}
+
+
+
+
+
