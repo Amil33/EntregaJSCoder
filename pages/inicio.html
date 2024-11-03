@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- JS -->
+        <script defer src="../js/inicioGame.js""></script>
+        <!-- Styles CSS-->
+        <link rel="stylesheet" href="../css/styles.css">
+    <title>Inicio del Juego</title>
+</head>
+<body>
+    <main class="inicio__container">
+        <div id="wallet-display">Monedero: <span id="wallet-amount">20</span> monedas</div>
+
+        <article class="article__container">
+            <div>
+                <h1>¡Un nuevo aventurero llega a la ciudad! </h1>
+            </div>
+            <div id="character-info">
+                <!-- Aquí se mostrarán los datos del personaje -->
+            </div>
+        </article>
+        <!-- Probando la lógica de la visualizacion de los items-->
+        <article class="article__container">
+            <button id="open-shop-btn">Entrar a la Tienda</button>
+        
+            <div id="shop-interface" style="display: none;">
+                <h2>Tienda de Equipamiento</h2>
+                <div id="items-container">
+                    <!-- Aquí se generarán los ítems -->
+                </div>
+                <h3>Tu Bolsa</h3>
+                <div id="bag-container">
+                    <!-- Aquí se mostrarán los ítems añadidos a la bolsa -->
+                </div>
+                <button onclick="finalizePurchase()">Finalizar Compra</button>
+            </div>
+        </article>
+    </main>
+    
+</body>
+</html>

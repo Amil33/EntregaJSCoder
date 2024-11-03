@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Espada de Madera",
+        "type": "arma",
+        "price": 10,
+        "description": "Una espada básica para principiantes."
+    },
+    {
+        "id": 2,
+        "name": "Escudo de Madera",
+        "type": "defensa",
+        "price": 15,
+        "description": "Un escudo ligero para protección."
+    },
+    {
+        "id": 3,
+        "name": "Poción de Curación",
+        "type": "consumible",
+        "price": 5,
+        "description": "Restaura 20 puntos de vida."
+    }
+]

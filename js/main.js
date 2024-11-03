@@ -6,6 +6,40 @@ document.getElementById('new-game').addEventListener('click', function() {
     document.getElementById('character-creation').style.display = 'flex';
     document.getElementById('character-visual').style.display = 'flex'; // Muestra el contenedor de visualización
 });
+//----------------
+// -_-_-_-_- Seccion de navegación por el menu -_-_-_-
+//----------------
+// Función para mostrar una sección y ocultar el menú principal
+function showSection(sectionId) {
+    document.querySelector('.menu-container').style.display = 'none';
+    document.getElementById(sectionId).style.display = 'block';
+}
+// Event listeners para mostrar cada sección
+document.querySelector('.menu-button:nth-child(2)').addEventListener('click', () => showSection('load-game'));
+document.querySelector('.menu-button:nth-child(3)').addEventListener('click', () => showSection('options'));
+document.querySelector('.menu-button:nth-child(4)').addEventListener('click', () => showSection('credits'));
+// Función para regresar al menú principal y ocultar otras secciones
+function returnToMenu(sectionId) {
+    document.getElementById(sectionId).style.display = 'none';
+    document.querySelector('.menu-container').style.display = 'block';
+}
+// Event listeners para regresar al menú principal desde cada sección
+document.getElementById('return-to-menu-character-creation').addEventListener('click', () => returnToMenu('character-creation'));
+document.getElementById('return-to-menu-load-game').addEventListener('click', () => returnToMenu('load-game'));
+document.getElementById('return-to-menu-options').addEventListener('click', () => returnToMenu('options'));
+document.getElementById('return-to-menu-credits').addEventListener('click', () => returnToMenu('credits'));
+//--------
+// Fin de la seccion de botones y regreso -_-_-_
+// ------
+
+
+
+
+
+
+
+
+
 
 //------------------------------------------------------------
 // Algoritmo de actualizacion visual de personaje
@@ -71,26 +105,34 @@ function updateTrasfondoDetails() {
     const trasfondoSeleccionado = trasfondoSelect.value;
     cuadroTrasfondo.textContent = beneficiosPorTrasfondo[trasfondoSeleccionado] || "Detalles de trasfondo";
 }
+
 //Asegurarse que el cuadro de trasfondo se actualiza
 trasfondoSelect.addEventListener('change', updateTrasfondoDetails);
+
 // Función para actualizar el color de la sexualidad
 function updateSexualityColor() {
     const sexuality = sexualitySelect.value;
+
     if (sexuality === 'masculino') {
         sexColorRect.style.backgroundColor = '#0000FF'; // Azul para masculino
+
     } else if (sexuality === 'femenino') {
         sexColorRect.style.backgroundColor = '#FFC0CB'; // Rosado para femenino
+
     } else {
         sexColorRect.style.backgroundColor = '#808080'; // Gris para otros
     }
 }
+
 // Actualizar los colores de raza al cambiar las selecciones
 raceSelect.addEventListener('change', function() {
     updateRaceColor();
 });
+
 sexualitySelect.addEventListener('change', function() {
     updateSexualityColor();
 });
+
 // Mostrar la visualización solo cuando sea necesario
 document.getElementById('character-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -98,65 +140,122 @@ document.getElementById('character-form').addEventListener('submit', function(ev
     updateRaceColor();
     updateSexualityColor();
 });
+
 //-------------------------------------------------------------
 // Fin del algoritmo de actualizacion de visualizacion del Personaje
 // -----------------------------------------------------------
 
-//--------------
-// Evitar que el formulario se envíe y recargue la página
-document.getElementById('character-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita que el formulario recargue la página
-    alert("Formulario completado. Personaje creado (simulado)"); 
-    // Aquí podrías procesar los datos del formulario
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------
+// ------------------ Funciones de guardado y carga de datos
+//-------------------------------------------------------------------
+
+// Encuentra el primer slot vacío disponible en el localStorage
+const findEmptySlot = () => {
+    for (let i = 1; i <= 3; i++) { // Supongamos que tienes 3 slots
+        const slotKey = `characterData${i}`;
+        if (!localStorage.getItem(slotKey)) {
+            return slotKey; // Devuelve el primer slot vacío encontrado
+        }
+    }
+    return null; // Si todos los slots están llenos, devuelve null
+};
+
+// Guarda el personaje en un slot específico
+const saveCharacter = (slotNumber) => {
+    const characterData = {
+        name: document.getElementById("name").value,
+        race: document.getElementById("race").value,
+        sexuality: document.getElementById("sexuality").value,
+        age: document.getElementById("age").value,
+        trasfondo: document.getElementById("trasfondo").value
+    };
+    const slotKey = `characterData${slotNumber}`;
+    localStorage.setItem(slotKey, JSON.stringify(characterData));
+};
+
+// Guarda el personaje en el primer slot vacío
+const saveCharacterInEmptySlot = () => {
+    const characterData = {
+        name: document.getElementById("name").value,
+        race: document.getElementById("race").value,
+        sexuality: document.getElementById("sexuality").value,
+        age: document.getElementById("age").value,
+        trasfondo: document.getElementById("trasfondo").value
+    };
+
+    const emptySlotKey = findEmptySlot();
+    if (emptySlotKey) {
+        localStorage.setItem(emptySlotKey, JSON.stringify(characterData));
+
+        // Extrae el número de slot a partir de `emptySlotKey`, que es algo como "characterData1"
+        const slotNumber = emptySlotKey.replace("characterData", "");
+        window.open(`pages/inicio.html?slot=${slotNumber}`, "_blank"); // Abre la página de inicio con el personaje creado
+    } else {
+        alert("Todos los slots están llenos. Por favor, borra un slot antes de crear un nuevo personaje.");
+    }
+};
+
+
+//---------------------------------------------------------------------
+// ------------------ Eventos de guardado en el formulario
+//-------------------------------------------------------------------
+document.getElementById("character-form").addEventListener("submit", (event) => {
+    event.preventDefault(); // Evita el envío del formulario
+    alert("Formulario completado. Personaje creado (simulado)");
+    saveCharacterInEmptySlot(); // Llama a la función que guarda en el primer slot vacío
 });
 
-//----------------
-// -_-_-_-_- Seccion de botones y regreso al menú principal -_-_-_-
-//----------------
-// Mostrar la sección de Cargar Partida
-document.querySelector('.menu-button:nth-child(2)').addEventListener('click', function() {
-    document.querySelector('.menu-container').style.display = 'none';
-    document.getElementById('load-game').style.display = 'block';
+//---------------------------------------------------------------------
+// ------------------ Carga de partidas
+//-------------------------------------------------------------------
+
+// Define la función loadCharacter para que funcione con el onclick en el HTML
+const loadCharacter = (slotNumber) => {
+    const slotKey = `characterData${slotNumber}`;
+    const savedData = localStorage.getItem(slotKey);
+
+    if (savedData) {
+        const characterData = JSON.parse(savedData);
+        window.open(`pages/inicio.html?slot=${slotNumber}`, "_blank"); // Abre la página de inicio con el personaje cargado
+    } else {
+        alert("No se encontró una partida guardada en este slot.");
+    }
+};
+
+//---------------------------------------------------------------------
+// ------------------ Borrar datos de un slot específico
+//-------------------------------------------------------------------
+const deleteCharacter = (slotNumber) => {
+    const slotKey = `characterData${slotNumber}`;
+    if (localStorage.getItem(slotKey)) {
+        localStorage.removeItem(slotKey);
+        alert(`Partida guardada en el Slot ${slotNumber} ha sido eliminada.`);
+    } else {
+        alert(`No hay datos en el Slot ${slotNumber} para borrar.`);
+    }
+};
+
+//---------------------------------------------------------------------
+// ------------------ Eventos para los botones de borrar slots
+//-------------------------------------------------------------------
+document.querySelectorAll(".delete-slot").forEach((button, index) => {
+    button.addEventListener("click", () => {
+        deleteCharacter(index + 1); // Borra el personaje del slot correspondiente
+    });
 });
 
-// Mostrar la sección de Opciones
-document.querySelector('.menu-button:nth-child(3)').addEventListener('click', function() {
-    document.querySelector('.menu-container').style.display = 'none';
-    document.getElementById('options').style.display = 'block';
-});
 
-// Mostrar la sección de Créditos
-document.querySelector('.menu-button:nth-child(4)').addEventListener('click', function() {
-    document.querySelector('.menu-container').style.display = 'none';
-    document.getElementById('credits').style.display = 'block';
-});
 
-//volver al menú principal desde la creacion de personaje
-document.getElementById('return-to-menu-load').addEventListener('click', function() {
-    document.getElementById('character-creation').style.display = 'none';
-    document.querySelector('.menu-container').style.display = 'block';
-});
 
-// Volver al menú principal desde Cargar Partida
-document.getElementById('return-to-menu-load').addEventListener('click', function() {
-    document.getElementById('load-game').style.display = 'none';
-    document.querySelector('.menu-container').style.display = 'block';
-});
-
-// Volver al menú principal desde Opciones
-document.getElementById('return-to-menu-options').addEventListener('click', function() {
-    document.getElementById('options').style.display = 'none';
-    document.querySelector('.menu-container').style.display = 'block';
-});
-
-// Volver al menú principal desde Créditos
-document.getElementById('return-to-menu-credits').addEventListener('click', function() {
-    document.getElementById('credits').style.display = 'none';
-    document.querySelector('.menu-container').style.display = 'block';
-});
-//--------
-// Fin de la seccion de botones y regreso -_-_-_
-// ------
 
 
 

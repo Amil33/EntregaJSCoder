@@ -1,3 +1,9 @@
+:root {
+    --color-bg: #1a237e;
+    --color-p: #eee;
+    --color-primary: #48e;
+    --color-secundary: #283593;
+}
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +12,8 @@
 }
 
 body {
-    background-color: #1a237e;
-    color: white;
+    background-color: var(--color-bg);
+    color: var(--color-p);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,9 +34,9 @@ body {
 }
 
 .menu-button {
-    background-color: #ffffff;
-    color: #1a237e;
-    border: 2px solid #ffffff;
+    background-color: var(--color-p);
+    color: var(--color-bg);
+    border: 2px solid var(--color-p);
     padding: 10px 20px;
     margin: 10px;
     font-size: 1.2em;
@@ -39,14 +45,14 @@ body {
 }
 
 .menu-button:hover {
-    background-color: #1a237e;
-    color: #ffffff;
+    background-color: var(--color-bg);
+    color: var(--color-p);
 }
 /* ----------------
                 Seccion de creacion de personaje
                                               --------------------- */
 #character-creation {
-    background-color: #283593;
+    background-color: var(--color-secundary);
     padding: 20px;
     width: 1440px;
     max-width: 90%;
@@ -58,13 +64,13 @@ body {
 }
 
 label, input, select {
-    color: white;
+    color: var(--color-p);
 }
 
 input, select {
-    background-color: #1a237e;
-    border: 1px solid white;
-    color: white;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-p);
+    color: var(--color-p);
     padding: 5px;
 }
 
@@ -80,7 +86,7 @@ form {
     align-items: flex-start;
     width: 400px;
     max-width: 30%;
-    border: solid 1px white;
+    border: solid 1px var(--color-p);
 }
 
 #character-form {
@@ -94,7 +100,7 @@ form {
 }
 
 #cuadro-habilidades, #cuadro-trasfondo {
-    background-color: #48e; /* Se actualizarán según la raza y trasfondo */
+    background-color: var(--color-primary); /* Se actualizarán según la raza y trasfondo */
 }
 
 /* Visualizacion del personaje */
@@ -124,8 +130,8 @@ form {
 
 /* Estilo para el contenedor y botones de las secciones adicionales */
 #load-game, #options, #credits {
-    background-color: #283593;
-    border: 1px solid white;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-p);
     padding: 20px;
     display: none;
 }
@@ -134,14 +140,14 @@ form {
 .save-slot {
     margin: 10px;
     padding: 10px;
-    border: 1px solid white;
-    background-color: #1a237e;
+    border: 1px solid var(--color-p);
+    background-color: var(--color-bg);
 }
 
 .save-slot button {
-    background-color: #ffffff;
-    color: #1a237e;
-    border: 2px solid #ffffff;
+    background-color: var(--color-p);
+    color: var(--color-bg);
+    border: 2px solid var(--color-p);
     padding: 5px 10px;
     margin: 10px;
     font-size: 1em;
@@ -150,15 +156,15 @@ form {
 }
 
 .save-slot button:hover {
-    background-color: #1a237e;
-    color: #ffffff;
+    background-color: var(--color-bg);
+    color: var(--color-p);
 }
 
 /* Botones de retorno en cada sección */
 #return-to-menu-load, #return-to-menu-options, #return-to-menu-credits {
-    background-color: #ffffff;
-    color: #1a237e;
-    border: 2px solid #ffffff;
+    background-color: var(--color-p);
+    color: var(--color-bg);
+    border: 2px solid var(--color-p);
     padding: 10px 20px;
     margin-top: 20px;
     font-size: 1.2em;
@@ -167,10 +173,68 @@ form {
 }
 
 #return-to-menu-load:hover, #return-to-menu-options:hover, #return-to-menu-credits:hover {
-    background-color: #1a237e;
-    color: #fff;
+    background-color: var(--color-bg);
+    color: var(--color-p);
 }
 
+
+
+
+
+  /*-------------------------------------------*/
+ /*----------- Sección de tienda -------------*/
+/*-------------------------------------------*/
+.inicio__container {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.article__container {
+    width: 100%;
+    margin: 20px 0 20px 0;
+}
+.item-card, .bag-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+.item-image {
+    background-color: grey;
+    width: 100px;
+    height: 100px;
+}
+
+#shop-interface {
+    max-height: 600px; /* Ajusta según el tamaño deseado */
+    width: 800px;
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#items-container {
+    display: flex;
+    flex-direction: column; /* Fuerza que los ítems se apilen verticalmente */
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Añade un espacio entre cada ítem */
+}
+
+/* Opcional: Estilos de la tarjeta de ítem para una presentación más uniforme */
+.item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #48e;
+    width: 100%; /* Para que no se desborden si el contenedor tiene ancho limitado */
+}
 
 
 
