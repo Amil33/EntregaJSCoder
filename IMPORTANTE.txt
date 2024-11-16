@@ -1,0 +1,1 @@
+La versión final parece funcionar mal al despelgarse en GitHub, por favor revisar la version anterior mientras soluciono el problema.
