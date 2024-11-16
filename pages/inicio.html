@@ -3,41 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- JS -->
-        <script defer src="../js/inicioGame.js""></script>
-        <!-- Styles CSS-->
-        <link rel="stylesheet" href="../css/styles.css">
+    <!-- JS -->
+    <script defer src="../js/inicioGame.js"></script>
+    <!-- SweetAlert 2-->
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Styles CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
     <title>Inicio del Juego</title>
 </head>
 <body>
-    <main class="inicio__container">
-        <div id="wallet-display">Monedero: <span id="wallet-amount">20</span> monedas</div>
+    <div class="layout">
+        <header class="header">
+                <!-- Navbar -->
+            <div class="navbar">
+                <div class="navbar-brand">
+                    Aventurero de Bronce
+                </div>
+                <div id="game-clock" class="clock">
+                    <span id="clock-icon" class="clock-icon">☀️</span> <!-- Icono inicial de sol -->
+                    <span id="clock-text">Cargando...</span>
+                </div>
+                <nav class="navbar-links">
 
-        <article class="article__container">
-            <div>
-                <h1>¡Un nuevo aventurero llega a la ciudad! </h1>
+                    <a href="#estado" class="nav-link">Estado</a>
+                    <a href="#mapa" class="nav-link">Mapa</a>
+
+                </nav>
             </div>
-            <div id="character-info">
-                <!-- Aquí se mostrarán los datos del personaje -->
-            </div>
-        </article>
-        <!-- Probando la lógica de la visualizacion de los items-->
-        <article class="article__container">
-            <button id="open-shop-btn">Entrar a la Tienda</button>
+        </header>
         
-            <div id="shop-interface" style="display: none;">
-                <h2>Tienda de Equipamiento</h2>
-                <div id="items-container">
-                    <!-- Aquí se generarán los ítems -->
+        <main class="main">
+            <!-- Contenido principal del juego -->
+            <!-- Tarjeta de Aventurero -->
+            <!-- <div id="adventure-card" class="adventure-card">
+                <h2>Aventurero de Bronce</h2>
+                <div id="character-info">
                 </div>
-                <h3>Tu Bolsa</h3>
-                <div id="bag-container">
-                    <!-- Aquí se mostrarán los ítems añadidos a la bolsa -->
+                <button class="close-card-btn" onclick="closeCard()">X</button>
+            </div> -->
+            <!-- Contenedor de la sección de estado -->
+            <section class="estado__container" id="estado-container">
+                <!-- Tarjeta de aventurero -->
+                <div id="adventure-card" class="adventure-card">
+                    <h2>Aventurero de Bronce</h2>
+                    <div id="character-info">
+                        <!-- Datos del personaje -->
+                    </div>
                 </div>
-                <button onclick="finalizePurchase()">Finalizar Compra</button>
-            </div>
-        </article>
-    </main>
-    
+
+                <!-- Contenedor de imagen y carrusel -->
+                <div class="estado__info-container container-fluid m-0 p-0">
+                    <div class="estado__info row">
+                        <!-- Imagen del personaje -->
+                        <div class="estado__img-container col-md-3 column my-auto">
+
+                                <div id="estado-img-race" class="estado__img-race"></div>
+                                <div id="estado-race-sexuality" class="estado__race-sexuality"></div>
+                        </div>
+                        <!-- Carrusel con Estadísticas, Habilidades e Inventario -->
+                        <div class="col-md-9">
+                            <div id="character-carousel" class="carousel slide" data-bs-ride="false">
+                                <div class="carousel-inner">
+                                    <!-- Estadísticas -->
+                                    <div class="carousel-item active">
+                                        <div class="p-4">
+                                            <h3>Estadísticas</h3>
+                                            <p>Aquí van las estadísticas del personaje.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Habilidades -->
+                                    <div class="carousel-item">
+                                        <div class="p-4">
+                                            <h3>Habilidades</h3>
+                                            <p>Descripción de las habilidades del personaje.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Inventario -->
+                                    <div class="carousel-item">
+                                        <div class="p-4">
+                                            <h3>Inventario</h3>
+                                            <p>Contenido del inventario del personaje.</p>
+                                            <p>Monedero: <span class="wallet-amount">20</span> monedas</p>
+                                            <div id="inventory-container" class="inventory-container">
+                                                <!-- Aquí se mostrarán los ítems del inventario -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Controles del carrusel -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#character-carousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Anterior</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#character-carousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Siguiente</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Tienda (oculta inicialmente) -->
+            <article class="shop__container mx-auto">
+                <button id="open-shop-btn">Entrar a la Tienda</button>
+                <div id="shop-interface" class="m-auto">
+                    <p>Monedero: <span class="wallet-amount">20</span> monedas</p>
+                    <h2>Tienda de Equipamiento</h2>
+                    <div id="items-container">
+                        <!-- Aquí se generarán los ítems -->
+                    </div>
+                    <h3>Tu Bolsa</h3>
+                    <div id="bag-container">
+                        <!-- Aquí se mostrarán los ítems añadidos a la bolsa -->
+                    </div>
+                    <button onclick="finalizePurchase()">Finalizar Compra</button>
+                </div>
+            </article>
+        </main>
+        
+        <footer class="footer">
+            <!-- Contenido del footer (información adicional o enlaces) -->
+            Conoce más sobre el desarrollador.
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

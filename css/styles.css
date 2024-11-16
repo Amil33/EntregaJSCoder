@@ -3,6 +3,11 @@
     --color-p: #eee;
     --color-primary: #48e;
     --color-secundary: #283593;
+    --color-shadow: #333;
+    /*-- Colores para el grado de "bronce"--*/
+    --color-bronce: #8b4513;
+    --color-bronce-secundary: #cd7f32;
+
 }
 * {
     margin: 0;
@@ -11,7 +16,7 @@
     font-family: sans-serif;
 }
 
-body {
+.body {
     background-color: var(--color-bg);
     color: var(--color-p);
     display: flex;
@@ -123,10 +128,16 @@ form {
     background-color: #333; /* Gris por defecto */
 }
 
+/* ----------------------- Fin de la seccion de creacion de personaje -------------------------*/
 
-/* -----------------------
-                        Fin de la seccion de creacion de personaje
-                                                        -------------------------*/
+
+
+
+
+
+
+
+
 
 /* Estilo para el contenedor y botones de las secciones adicionales */
 #load-game, #options, #credits {
@@ -181,19 +192,213 @@ form {
 
 
 
+
+
+
+
+
   /*-------------------------------------------*/
- /*----------- Sección de tienda -------------*/
+ /*----------- Estilos de Inicio -------------*/
 /*-------------------------------------------*/
-.inicio__container {
-    min-height: 100dvh;
+/*------ Layout ----- */
+.layout {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Header, Main y Footer */
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer";
+    height: 100vh; /* Asegura que cubra toda la ventana */
+    background-color: var(--color-shadow);
+    color: var(--color-p);
+}
+
+/* Header, Main, y Footer ocupan sus áreas en el grid */
+.header {
+    grid-area: header;
+    padding: 1rem;
+    text-align: center;
+}
+
+.main {
+    grid-area: main;
+    padding: 2rem;
+    overflow-y: auto; /* Permite scroll si el contenido es extenso */
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    background-color: var(--color-bg);
 }
-.article__container {
+
+.footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 1rem;
+}
+/*-----------Fin de estilos de layout ----------------*/
+
+
+
+
+
+
+
+
+
+
+  /*-------------------------------------------*/
+ /*----------- Estilos de Navbar -------------*/
+/*-------------------------------------------*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-bronce);
+    padding: 1rem;
+    font-weight: bold;
+    height: 4rem;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+}
+.navbar-wallet {
+    font-size: 1.2rem;
+}
+.navbar-links {
+    display: flex;
+    gap: 1rem;
+}
+.nav-link {
+    color: var(--color-p);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+.nav-link:hover {
+    color: var(--color-bronce-secundary);
+}
+/*-----------Fin de estilos de Navbar ----------------*/
+
+
+
+
+
+
+
+
+
+
+  /*-------------------------------------------*/
+ /*----------- Estilos de Estado -------------*/
+/*-------------------------------------------*/
+.estado__container {
+    display: none;
+    color: var(--color-p);
+    text-shadow: 2px 2px 6px var(--color-shadow);
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-bronce-secundary);
+    border-radius: 10px;
+    height: 80dvh;
+    padding: 1rem;
+}
+
+.adventure-card {
+    color: var(--color-bronce-secundary);
+    text-shadow: 2px 2px 6px var(--color-shadow);
+    background-color: var(--color-bronce);
+    border: 2px solid var(--color-bronce-secundary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto;
+    position: relative;
+}
+.adventure-card h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.adventure-card p {
+    font-size: 1.2rem;
+}
+.close-card-btn {
+    color: var(--color-bronce-secundary);
+    background-color: var(--color-bronce);
+    border: none;
+    border-radius: 50%;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.close-card-btn:hover {
+    background-color: var(--color-bronce-secundary);
+    color: var(--color-shadow);
+    border-radius: 50%;
+}
+.estado__info-container {
+    height: 50%;
+    border-radius: 12px;
+    background-color: var(--color-secundary);
+}
+.estado__info {
+    height: 100%;
+}
+.estado__img-race, .estado__race-sexuality {
+    width: 150px;
+    height: 150px;
+    border: 1px solid var(--color-bg);
+    margin: auto;
+}
+/*--------------------- Inventario -------------------*/
+.inventory-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    place-content: center;
+    max-width: 70%;
+    margin: auto;
+}
+.inventory-item {
+    width: 60px;
+    height: 60px;
+    background-color: grey;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: white;
+}
+.carousel-item {
+    height: 340px;
+    background-color: var(--color-primary);
+    border: 3px solid var(--color-secundary);
+    border-radius: 8px;
+}
+/*-----------Fin de estilos de Estado ----------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+  /*-------------------------------------------*/
+ /*----------- Estilos de Tienda -------------*/
+/*-------------------------------------------*/
+.shop__container {
     width: 100%;
     margin: 20px 0 20px 0;
+    display: block;
 }
 .item-card, .bag-item {
     border: 1px solid #ccc;
@@ -209,11 +414,13 @@ form {
 }
 
 #shop-interface {
-    max-height: 600px; /* Ajusta según el tamaño deseado */
-    width: 800px;
+    max-height: 700px; /* Ajusta según el tamaño deseado */
+    width: 900px;
     overflow-y: auto; /* Habilita el desplazamiento vertical */
     padding: 10px;
     border: 1px solid #ccc;
+    display: none;
+    
 }
 
 #items-container {
@@ -235,6 +442,13 @@ form {
     background-color: #48e;
     width: 100%; /* Para que no se desborden si el contenedor tiene ancho limitado */
 }
+.swal-list {
+    list-style: none;
+}
+.swal-list li {
+    margin-bottom: 0.5rem;
+}
+/*-----------Fin de estilos de Tienda ----------------*/
 
 
 

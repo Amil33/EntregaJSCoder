@@ -44,6 +44,27 @@ document.getElementById('return-to-menu-credits').addEventListener('click', () =
 //------------------------------------------------------------
 // Algoritmo de actualizacion visual de personaje
 // -----------------------------------------------------------
+// -------- Alerta de creación de personaje estilizada con sweetalert
+function CreacionExitosa() {
+    Swal.fire({
+        title: '¡Personaje creado con éxito!',
+        text: 'Tu aventura comienza ahora',
+        iconHtml: '⚔️', // Icono personalizado
+        showConfirmButton: true,
+        confirmButtonText: '¡Vamos!',
+        customClass: {
+            icon: 'icon-class'
+        },
+        background: '#f7f2e0',
+        color: '#333',
+        confirmButtonColor: '#0077B6'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Guardar personaje en el primer slot vacío
+            saveCharacterInEmptySlot();
+        }
+    });
+}
 // Obtener los elementos de los rectángulos
 const baseColorRect = document.getElementById('base-color');
 const sexColorRect = document.getElementById('sex-color');
@@ -133,13 +154,44 @@ sexualitySelect.addEventListener('change', function() {
     updateSexualityColor();
 });
 
-// Mostrar la visualización solo cuando sea necesario
-document.getElementById('character-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    document.getElementById('character-visual').classList.remove('hidden'); // Mostrar la visualización
-    updateRaceColor();
-    updateSexualityColor();
-});
+// Función para validar los campos del formulario
+function validarFormulario() {
+    // Obtener los valores de los campos
+    const name = document.getElementById('name').value;
+    const race = raceSelect.value;
+    const sexuality = sexualitySelect.value;
+    const age = ageInput.value;
+    const trasfondo = trasfondoSelect.value;
+
+    // Comprobar si todos los campos requeridos tienen valores
+    if (!name || !race || !sexuality || !age || !trasfondo) {
+        Swal.fire({
+            title: 'Faltan datos',
+            text: 'Por favor, completa todos los campos obligatorios.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return false; // Impedir la ejecución de CreacionExitosa() si faltan datos
+    }
+
+    // Validar la edad dentro del rango permitido para la raza seleccionada
+    if (edadesPorRaza[race]) {
+        const { min, max } = edadesPorRaza[race];
+        if (age < min || age > max) {
+            Swal.fire({
+                title: 'Edad incorrecta',
+                text: `La edad debe estar entre ${min} y ${max} para la raza seleccionada.`,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+    }
+
+    return true; // Todo está bien
+}
+
+
 
 //-------------------------------------------------------------
 // Fin del algoritmo de actualizacion de visualizacion del Personaje
@@ -199,6 +251,7 @@ const saveCharacterInEmptySlot = () => {
         // Extrae el número de slot a partir de `emptySlotKey`, que es algo como "characterData1"
         const slotNumber = emptySlotKey.replace("characterData", "");
         window.open(`pages/inicio.html?slot=${slotNumber}`, "_blank"); // Abre la página de inicio con el personaje creado
+
     } else {
         alert("Todos los slots están llenos. Por favor, borra un slot antes de crear un nuevo personaje.");
     }
@@ -208,17 +261,25 @@ const saveCharacterInEmptySlot = () => {
 //---------------------------------------------------------------------
 // ------------------ Eventos de guardado en el formulario
 //-------------------------------------------------------------------
-document.getElementById("character-form").addEventListener("submit", (event) => {
-    event.preventDefault(); // Evita el envío del formulario
-    alert("Formulario completado. Personaje creado (simulado)");
-    saveCharacterInEmptySlot(); // Llama a la función que guarda en el primer slot vacío
+// Evento de clic en el botón de confirmación
+document.getElementById('confirm-button').addEventListener('click', function() {
+    // Validar el formulario antes de mostrar el mensaje de éxito
+    if (validarFormulario()) {
+        // Mostrar la visualización del personaje
+        document.getElementById('character-visual').classList.remove('hidden');
+        updateRaceColor();
+        updateSexualityColor();
+
+        // Llamar a SweetAlert para mostrar el mensaje de éxito
+        CreacionExitosa();
+    }
 });
+
 
 //---------------------------------------------------------------------
 // ------------------ Carga de partidas
 //-------------------------------------------------------------------
 
-// Define la función loadCharacter para que funcione con el onclick en el HTML
 const loadCharacter = (slotNumber) => {
     const slotKey = `characterData${slotNumber}`;
     const savedData = localStorage.getItem(slotKey);
